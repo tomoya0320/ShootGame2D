@@ -28,7 +28,7 @@ public class JumpManager : MonoBehaviour {
   }
 
   private void OnTriggerEnter2D(Collider2D collision) {
-    if (collision.CompareTag("Platform")) {
+    if (collision.CompareTag("Platform") && unit.vel.y < MathUtil.epsilon) {
       m_curJumpNum = 0;
     }
   }
