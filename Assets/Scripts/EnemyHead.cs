@@ -1,0 +1,22 @@
+﻿using UnityEngine;
+
+public class EnemyHead : MonoBehaviour {
+  [SerializeField]
+  private Unit _enemy;
+  [SerializeField]
+  private float _boundSpeed = 20.0f;
+
+  private void OnTriggerEnter2D(Collider2D collision) {
+    if (!_enemy.isAlive) {
+      return;
+    }
+
+    if (collision.name == "foot") {
+      var unit = collision.GetComponent<JumpManager>()?.unit;
+      if (unit != null && unit is Character && unit.vel.y < MathUtil.epsilon) {
+        unit.Bound(_boundSpeed);
+        _enemy.DoHurt(unit.atk);
+      }
+    }
+  }
+}
