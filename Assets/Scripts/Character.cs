@@ -9,6 +9,7 @@ public class Character : Unit {
   }
 
   protected override void OnDie() {
+    base.OnDie();
     //Down和Up事件需要特殊处理
     InputManager.RemoveDownEvent(PressKey.JUMP, OnJump);
     InputManager.RemoveDownEvent(PressKey.SWITCH_WEAPON, OnSwitchWeapon);
