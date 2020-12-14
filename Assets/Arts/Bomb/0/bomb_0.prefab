@@ -154,4 +154,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6675dce7399879b409b0e2c96432bd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _includeLauncher: 1
   _boomRange: 15

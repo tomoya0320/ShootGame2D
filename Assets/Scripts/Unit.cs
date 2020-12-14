@@ -134,6 +134,10 @@ public abstract class Unit : MonoBehaviour {
     }
   }
 
+  public void DoRecover(float hp) {
+    attribute.hp = Mathf.Min(attribute.hp + hp, m_maxHp);
+  }
+
   protected virtual void OnDie() {
 
   }

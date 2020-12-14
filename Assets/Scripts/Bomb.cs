@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Bomb : MonoBehaviour {
   [SerializeField]
+  private bool _includeLauncher;
+  [SerializeField]
   private float _boomRange = 1.0f;
   private bool m_active;
   private Unit m_launcher;
@@ -29,7 +31,7 @@ public class Bomb : MonoBehaviour {
     }
 
     var target = collision.GetComponent<Unit>();
-    if (target != null && target != m_launcher && target.isAlive && !m_damagedUnits.Contains(target)) {
+    if (target != null && (_includeLauncher || target != m_launcher) && target.isAlive && !m_damagedUnits.Contains(target)) {
       target.DoHurt(m_launcher.atk * atkScale);
       m_damagedUnits.Add(target);
     }
