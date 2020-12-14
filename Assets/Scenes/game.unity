@@ -1449,7 +1449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackAudio: {fileID: 1037303184}
-  _attackDelta: 0.3
+  _attackDelta: 0.4
   _atkScale: 1
   shootMuzzle: {fileID: 370739375}
   bulletShellPrefab: {fileID: 1132998840130229253, guid: d5754b8f3cdae7d47a120996680c953c, type: 3}
@@ -1912,7 +1912,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33db0a7d8172b5c4db99f693c5fe5576, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -7,7 +7,7 @@ public class Timer {
   private float m_currentTime;
   public bool ready => m_currentTime >= m_startTime + m_deltaTime;
 
-  public void OnStart(float startTime,float deltaTime) {
+  public void OnStart(float startTime, float deltaTime) {
     m_deltaTime = deltaTime;
     m_startTime = startTime;
     m_currentTime = startTime;

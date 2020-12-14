@@ -18,7 +18,7 @@ public class HpView : MonoBehaviour {
     m_curHpRatio = Mathf.Lerp(m_curHpRatio, _owner.hpRatio, _updateSpeed);
     m_hpImage.fillAmount = m_curHpRatio;
     m_hpImage.color = Color.HSVToRGB(m_curHpRatio / 3.0f, 1.0f, 1.0f);
-    if(!_owner.isAlive) {
+    if (!_owner.isAlive) {
       transform.parent.gameObject.SetActive(false);
     }
   }

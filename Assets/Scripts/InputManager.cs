@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour {
     if (Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer) {
       foreach (var keyMap in _keyMaps) {
         m_pressKeyDict[keyMap.pressKey] = Input.GetButton(keyMap.name);
-        if(m_downEventDict.ContainsKey(keyMap.pressKey) && Input.GetButtonDown(keyMap.name)) {
+        if (m_downEventDict.ContainsKey(keyMap.pressKey) && Input.GetButtonDown(keyMap.name)) {
           m_downEventDict[keyMap.pressKey]?.Invoke();
         }
       }
@@ -46,7 +46,7 @@ public class InputManager : MonoBehaviour {
     return instance.m_pressKeyDict[pressKey];
   }
 
-  public static void RegisterDownEvent(PressKey pressKey,Action cb) {
+  public static void RegisterDownEvent(PressKey pressKey, Action cb) {
     if (instance.m_downEventDict.ContainsKey(pressKey)) {
       instance.m_downEventDict[pressKey] += cb;
     } else {

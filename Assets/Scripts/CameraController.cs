@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour {
   }
 
   public static void DoShake(float duration = 0.1f, float strength = 0.3f) {
-    if(Mathf.Abs(instance.desPos.x - instance.transform.position.x) < 1.0f &&
+    if (Mathf.Abs(instance.desPos.x - instance.transform.position.x) < 1.0f &&
        Mathf.Abs(instance.desPos.y - instance.transform.position.y) < 1.0f) {
 
       Camera.main.DOShakePosition(duration, strength, 60);

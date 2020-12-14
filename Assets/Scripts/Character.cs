@@ -16,7 +16,7 @@ public class Character : Unit {
 
   protected override void UpdateAnimState() {
     base.UpdateAnimState();
-    animator.SetBool("move", (InputManager.GetButton(PressKey.LEFT) || 
+    animator.SetBool("move", (InputManager.GetButton(PressKey.LEFT) ||
              InputManager.GetButton(PressKey.RIGHT)) && jumpManager.isGrounded);
   }
 
@@ -38,7 +38,7 @@ public class Character : Unit {
     tempVel.y = vel.y;
 
     //攻击
-    if (InputManager.GetButton(PressKey.ATTACK)){
+    if (InputManager.GetButton(PressKey.ATTACK)) {
       currentWeapon?.OnAttack();
     }
 

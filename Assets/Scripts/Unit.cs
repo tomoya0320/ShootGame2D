@@ -126,7 +126,7 @@ public abstract class Unit : MonoBehaviour {
   }
 
   public void DoHurt(float damage) {
-    if(damage >= attribute.hp) {
+    if (damage >= attribute.hp) {
       attribute.hp = 0;
       vel = Vector2.zero;
     } else {

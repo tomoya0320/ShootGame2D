@@ -34,7 +34,7 @@ public class Missile : MonoBehaviour {
     m_spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
-  public void OnLaunch(Unit launcher,float atkScale, float angle, Vector3 initPos, Action<Missile> onMissileBoom = null) {
+  public void OnLaunch(Unit launcher, float atkScale, float angle, Vector3 initPos, Action<Missile> onMissileBoom = null) {
     this.atkScale = atkScale;
     m_active = true;
     m_launcher = launcher;

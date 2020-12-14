@@ -12,7 +12,7 @@ public class Bomb : MonoBehaviour {
   public float atkScale { private set; get; }
   private HashSet<Unit> m_damagedUnits = new HashSet<Unit>();
 
-  public void OnBoom(Unit launcher, float atkScale,Vector3 initPos) {
+  public void OnBoom(Unit launcher, float atkScale, Vector3 initPos) {
     m_active = true;
     m_launcher = launcher;
     this.atkScale = atkScale;
