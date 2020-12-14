@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -128,7 +129,6 @@ public abstract class Unit : MonoBehaviour {
   public void DoHurt(float damage) {
     if (damage >= attribute.hp) {
       attribute.hp = 0;
-      vel = Vector2.zero;
     } else {
       attribute.hp -= damage;
     }
@@ -146,6 +146,10 @@ public abstract class Unit : MonoBehaviour {
   }
 
   protected virtual void OnDie() {
-
+    tempVel = Vector2.one * 250.0f;
+    tempVel.x *= -direction;
+    vel = Vector2.zero;
+    m_rigidbody2D.sharedMaterial = null;
+    m_rigidbody2D.AddForce(tempVel);
   }
 }

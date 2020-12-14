@@ -16,7 +16,7 @@ public class Enemy : Unit {
     tempVel.y = vel.y;
 
     //随机跳跃
-    if (Random.Range(0, 1.0f) < 0.01f) {
+    if (Random.Range(0, 1.0f) < 0.005f) {
       OnJump();
     }
 
