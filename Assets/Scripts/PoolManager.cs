@@ -15,8 +15,8 @@ public class PoolManager {
     }
   }
 
-  public T GetComponent<T>() where T : Component {
-    var obj = GetGameObject();
+  public T GetComponent<T>(bool active = true) where T : Component {
+    var obj = GetGameObject(active);
     var component = obj.GetComponent<T>();
     if (component == null) {
       component = obj.AddComponent<T>();
@@ -24,10 +24,10 @@ public class PoolManager {
     return component;
   }
 
-  public GameObject GetGameObject() {
+  public GameObject GetGameObject(bool active = true) {
     foreach (var obj in m_pool) {
       if (!obj.activeSelf) {
-        obj.SetActive(true);
+        obj.SetActive(active);
         return obj;
       }
     }

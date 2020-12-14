@@ -30,7 +30,7 @@ public class Gun : Weapon {
   }
 
   public override void OnAttack() {
-    if (timer.ready) {
+    if (timer.ready && !owner.isSwitchingWeapon) {
       shotCount++;
 
       timer.OnStart(Time.fixedTime, _attackDelta);
@@ -60,6 +60,10 @@ public class Gun : Weapon {
       if (!recoiling) {
         recoiling = true;
         StartCoroutine(_DoRecoil(owner.direction));
+      }
+
+      if (_attackAudio != null) {
+        _attackAudio.Play();
       }
     }
   }

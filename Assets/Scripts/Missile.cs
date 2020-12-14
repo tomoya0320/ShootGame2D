@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(AudioSource), typeof(Rigidbody2D)), 
- RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator), typeof(SpriteRenderer), typeof(Rigidbody2D))]
 public class Missile : MonoBehaviour {
+  [SerializeField]
+  private AudioSource _boomAudio;
   [SerializeField]
   private bool _penetrable;
   [SerializeField]
@@ -17,7 +18,6 @@ public class Missile : MonoBehaviour {
   private Action<Missile> m_onMissileBoom;
   private Animator m_animator;
   private Rigidbody2D m_rigidbody2D;
-  private AudioSource m_audioSource;
   private SpriteRenderer m_spriteRenderer;
   public Vector2 vel {
     get {
@@ -31,7 +31,6 @@ public class Missile : MonoBehaviour {
   private void Awake() {
     m_animator = GetComponent<Animator>();
     m_rigidbody2D = GetComponent<Rigidbody2D>();
-    m_audioSource = GetComponent<AudioSource>();
     m_spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
@@ -69,11 +68,13 @@ public class Missile : MonoBehaviour {
 
   private void _OnMissileBoom(Action cb = null) {
     cb?.Invoke();
-    m_onMissileBoom?.Invoke(this);
     m_active = false;
-    m_audioSource.Play();
-    m_animator.SetTrigger("boom");
     vel = Vector2.zero;
+    m_animator.SetTrigger("boom");
+    m_onMissileBoom?.Invoke(this);
+    if (_boomAudio != null) {
+      _boomAudio.Play();
+    }
   }
 
   private void _OnRecycle() {

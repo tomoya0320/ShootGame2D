@@ -29,6 +29,8 @@ public abstract class Unit : MonoBehaviour {
   protected Attribute attribute;
   [SerializeField]
   protected List<Weapon> weapons;
+  [SerializeField]
+  private AudioSource _switchWeaponAudio;
   protected int curWeaponIdx;
   protected Weapon currentWeapon;
   protected Animator animator;
@@ -37,6 +39,7 @@ public abstract class Unit : MonoBehaviour {
   //经常用到的临时变量
   protected Vector2 tempVel;
   protected AnimTriggerState triggerState = AnimTriggerState.NONE;
+  public bool isSwitchingWeapon => _switchWeaponAudio != null && _switchWeaponAudio.isPlaying;
   public int direction => spriteRenderer.flipX ? 1 : -1;
   public bool flipX => spriteRenderer.flipX;
   public Vector3 position => transform.position;
@@ -96,10 +99,15 @@ public abstract class Unit : MonoBehaviour {
   }
 
   protected void OnSwitchWeapon() {
-    if (curWeaponIdx >= 0) {
-      curWeaponIdx = (curWeaponIdx + 1) % weapons.Count;
+    if (isSwitchingWeapon || curWeaponIdx < 0) {
+      return;
     }
+
+    curWeaponIdx = (curWeaponIdx + 1) % weapons.Count;
     currentWeapon = weapons[curWeaponIdx];
+    if (_switchWeaponAudio != null) {
+      _switchWeaponAudio.Play();
+    }
   }
 
   protected virtual void OnJump() {

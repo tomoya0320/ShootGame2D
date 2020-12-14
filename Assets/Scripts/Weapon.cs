@@ -3,6 +3,8 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour {
   [SerializeField]
+  protected AudioSource _attackAudio;
+  [SerializeField]
   protected float _attackDelta = 0.1f;
   [SerializeField]
   protected float _atkScale = 1.0f;

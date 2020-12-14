@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Bomb : MonoBehaviour {
   [SerializeField]
+  private AudioSource _boomAudio;
+  [SerializeField]
   private bool _includeLauncher;
   [SerializeField]
   private float _boomRange = 1.0f;
@@ -22,6 +24,9 @@ public class Bomb : MonoBehaviour {
     this.atkScale = atkScale;
     initPos.z = transform.position.z;
     transform.position = initPos;
+    if (_boomAudio != null) {
+      _boomAudio.Play();
+    }
     CameraController.DoShake(0.2f, 1.0f);
   }
 
