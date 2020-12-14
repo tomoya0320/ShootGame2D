@@ -20,6 +20,9 @@ public class Enemy : Unit {
       OnJump();
     }
 
+    //攻击
+    currentWeapon?.OnAttack();
+
     //应用速度
     vel = tempVel + attribute.extraVel;
   }

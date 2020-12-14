@@ -17,7 +17,7 @@ public class EnemyGenerator : MonoBehaviour {
   [SerializeField]
   private Transform _folder;
   [SerializeField]
-  private List<GeneratorData> _waves;
+  private GeneratorData[] _waves;
 
   private IEnumerator Start() {
     foreach (var data in _waves) {

@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Gun : Weapon {
   [SerializeField]
-  protected Transform _shootMuzzle;
+  protected Transform shootMuzzle;
   [SerializeField]
-  private GameObject _bulletShellPrefab;
+  protected GameObject bulletShellPrefab;
   [SerializeField]
-  private Transform _bulletShellMuzzle;
+  protected Transform bulletShellMuzzle;
   [SerializeField]
-  protected GameObject _missilePrefab;
+  protected GameObject missilePrefab;
   protected Transform poolFolder;
   [SerializeField]
-  protected int _onShotNum = 1;
+  protected int onShotNum = 1;
   [SerializeField]
-  protected int _shotAngleDelta;
+  protected int shotAngleDelta;
   [SerializeField]
-  protected int _randomAngle;
+  protected int randomAngle;
+  [SerializeField]
+  protected float recoilVel;
+  [SerializeField]
+  protected float recoilTime;
+  protected bool recoiling;
   protected int shotCount;
   protected PoolManager missilePool;
   protected PoolManager bulletShellPool;
@@ -25,8 +31,8 @@ public class Gun : Weapon {
     base.OnInit(owner);
     //TODO:优化
     poolFolder = GameObject.Find("Pool")?.transform;
-    missilePool = new PoolManager(poolFolder, _missilePrefab);
-    bulletShellPool = new PoolManager(poolFolder, _bulletShellPrefab);
+    missilePool = new PoolManager(poolFolder, missilePrefab);
+    bulletShellPool = new PoolManager(poolFolder, bulletShellPrefab);
   }
 
   public override void OnAttack() {
@@ -35,18 +41,18 @@ public class Gun : Weapon {
 
       timer.OnStart(Time.fixedTime, _attackDelta);
 
-      float initAngle = -0.5f * (_onShotNum - 1) * _shotAngleDelta;
-      for (int i = 0; i < _onShotNum; i++) {
+      float initAngle = -0.5f * (onShotNum - 1) * shotAngleDelta;
+      for (int i = 0; i < onShotNum; i++) {
         var missile = missilePool.GetComponent<Missile>();
-        Vector3 initPos = _shootMuzzle.position;
+        Vector3 initPos = shootMuzzle.position;
         initPos.x = owner.position.x + owner.direction *
-                   (owner.position.x - _shootMuzzle.position.x);
-        float angle = Random.Range(-_randomAngle, _randomAngle) + initAngle + i * _shotAngleDelta;
+                   (owner.position.x - shootMuzzle.position.x);
+        float angle = Random.Range(-randomAngle, randomAngle) + initAngle + i * shotAngleDelta;
         missile.OnLaunch(owner, _atkScale, angle, initPos, onMissileBoom);
 
-        initPos = _bulletShellMuzzle.position;
+        initPos = bulletShellMuzzle.position;
         initPos.x = owner.position.x + owner.direction *
-                   (owner.position.x - _bulletShellMuzzle.position.x);
+                   (owner.position.x - bulletShellMuzzle.position.x);
         Vector2 bulletShellDir = Vector2.one;
         bulletShellDir.x *= -owner.direction;
         var obj = bulletShellPool.GetGameObject();
@@ -66,5 +72,12 @@ public class Gun : Weapon {
         _attackAudio.Play();
       }
     }
+  }
+
+  protected virtual IEnumerator _DoRecoil(int direction) {
+    owner.AppendExtralVel(direction * recoilVel * Vector2.left);
+    yield return new WaitForSeconds(recoilTime);
+    owner.AppendExtralVel(direction * recoilVel * Vector2.right);
+    recoiling = false;
   }
 }

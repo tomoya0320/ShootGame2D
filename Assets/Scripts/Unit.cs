@@ -24,13 +24,13 @@ public abstract class Unit : MonoBehaviour {
   //临时用
   private float m_maxHp;
   [SerializeField]
-  protected JumpManager jumpManager;
-  [SerializeField]
   protected Attribute attribute;
   [SerializeField]
   protected List<Weapon> weapons;
   [SerializeField]
-  private AudioSource _switchWeaponAudio;
+  protected JumpManager jumpManager;
+  [SerializeField]
+  protected AudioSource switchWeaponAudio;
   protected int curWeaponIdx;
   protected Weapon currentWeapon;
   protected Animator animator;
@@ -39,7 +39,7 @@ public abstract class Unit : MonoBehaviour {
   //经常用到的临时变量
   protected Vector2 tempVel;
   protected AnimTriggerState triggerState = AnimTriggerState.NONE;
-  public bool isSwitchingWeapon => _switchWeaponAudio != null && _switchWeaponAudio.isPlaying;
+  public bool isSwitchingWeapon => switchWeaponAudio != null && switchWeaponAudio.isPlaying;
   public int direction => spriteRenderer.flipX ? 1 : -1;
   public bool flipX => spriteRenderer.flipX;
   public Vector3 position => transform.position;
@@ -59,20 +59,19 @@ public abstract class Unit : MonoBehaviour {
     animator = GetComponent<Animator>();
     m_rigidbody2D = GetComponent<Rigidbody2D>();
     spriteRenderer = GetComponent<SpriteRenderer>();
+  }
 
+  protected virtual void Start() {
     foreach (var weapon in weapons) {
       weapon.OnInit(this);
     }
+
     curWeaponIdx = weapons.Count > 0 ? 0 : -1;
     currentWeapon = curWeaponIdx >= 0 ? weapons[curWeaponIdx] : null;
     jumpManager.OnInit(this);
 
     //临时用
     m_maxHp = attribute.hp;
-  }
-
-  protected virtual void Start() {
-
   }
 
   protected virtual void Update() {
@@ -105,8 +104,8 @@ public abstract class Unit : MonoBehaviour {
 
     curWeaponIdx = (curWeaponIdx + 1) % weapons.Count;
     currentWeapon = weapons[curWeaponIdx];
-    if (_switchWeaponAudio != null) {
-      _switchWeaponAudio.Play();
+    if (switchWeaponAudio != null) {
+      switchWeaponAudio.Play();
     }
   }
 
@@ -122,8 +121,8 @@ public abstract class Unit : MonoBehaviour {
     attribute.extraVel += vel;
   }
 
-  public void Bound(float boundSpeed) {
-    vel = new Vector2(vel.x, boundSpeed);
+  public void Bound(Vector2 boundVel) {
+    vel = boundVel;
   }
 
   public void DoHurt(float damage) {

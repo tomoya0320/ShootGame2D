@@ -48,7 +48,7 @@ public class Missile : MonoBehaviour {
     eulerAngles.z = angle * launcher.direction;
     transform.eulerAngles = eulerAngles;
     //移动方向
-    var direction = MathUtil.RotateVector3(Vector2.right, angle);
+    var direction = MathUtil.RotateVector2(Vector2.right, angle);
     direction.x *= launcher.direction;
     vel = direction * _moveSpeed;
     //图片水平翻转

@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour {
   }
 
   [SerializeField]
-  private List<KeyMap> _keyMaps;
+  private KeyMap[] _keyMaps;
   private Dictionary<PressKey, bool> m_pressKeyDict = new Dictionary<PressKey, bool>();
   private Dictionary<PressKey, Action> m_upEventDict = new Dictionary<PressKey, Action>();
   private Dictionary<PressKey, Action> m_downEventDict = new Dictionary<PressKey, Action>();

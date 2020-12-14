@@ -2,16 +2,16 @@
 
 public class GunWithBomb : Gun {
   [SerializeField]
-  protected GameObject _bombPrefab;
+  protected GameObject bombPrefab;
   [SerializeField]
-  protected int _boomDelta = 1;
+  protected int boomDelta = 1;
   protected PoolManager bombPool;
 
   public override void OnInit(Unit owner) {
     base.OnInit(owner);
-    bombPool = new PoolManager(poolFolder, _bombPrefab);
+    bombPool = new PoolManager(poolFolder, bombPrefab);
     onMissileBoom = missile => {
-      if (shotCount % _boomDelta == 0) {
+      if (shotCount % boomDelta == 0) {
         var bomb = bombPool.GetComponent<Bomb>();
         bomb.OnBoom(owner, missile.atkScale, missile.transform.position);
       }

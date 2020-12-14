@@ -16,4 +16,8 @@ public class Timer {
   public void OnUpdate(float delta) {
     m_currentTime += delta;
   }
+
+  public void OnReset() {
+    m_deltaTime = m_startTime = m_currentTime = 0;
+  }
 }

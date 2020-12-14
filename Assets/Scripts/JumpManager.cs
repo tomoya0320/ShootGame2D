@@ -1,27 +1,24 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class JumpManager : MonoBehaviour {
   [SerializeField]
-  public int maxJumpNum = 1;
+  private int _maxJumpNum = 1;
+  [SerializeField]
+  private AudioSource _jumpAudio;
   private int m_curJumpNum;
   public bool isGrounded => m_curJumpNum == 0;
-  private AudioSource m_audioSource;
   public Unit unit { private set; get; }
-
-  private void Awake() {
-    m_audioSource = GetComponent<AudioSource>();
-  }
 
   public void OnInit(Unit unit) {
     this.unit = unit;
-    m_curJumpNum = 0;
   }
 
   public bool TryJump() {
-    if (m_curJumpNum < maxJumpNum) {
+    if (m_curJumpNum < _maxJumpNum) {
       m_curJumpNum++;
-      m_audioSource.Play();
+      if (_jumpAudio != null) {
+        _jumpAudio.Play();
+      }
       return true;
     }
     return false;
@@ -35,7 +32,7 @@ public class JumpManager : MonoBehaviour {
 
   private void OnTriggerExit2D(Collider2D collision) {
     if (collision.CompareTag("Platform") && unit.vel.y < MathUtil.epsilon) {
-      m_curJumpNum = Mathf.Clamp(m_curJumpNum + 1, 0, maxJumpNum);
+      m_curJumpNum = Mathf.Clamp(m_curJumpNum + 1, 0, _maxJumpNum);
     }
   }
 }

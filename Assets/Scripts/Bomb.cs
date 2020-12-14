@@ -7,16 +7,10 @@ public class Bomb : MonoBehaviour {
   private AudioSource _boomAudio;
   [SerializeField]
   private bool _includeLauncher;
-  [SerializeField]
-  private float _boomRange = 1.0f;
   private bool m_active;
   private Unit m_launcher;
   public float atkScale { private set; get; }
   private HashSet<Unit> m_damagedUnits = new HashSet<Unit>();
-
-  private void Awake() {
-    transform.localScale *= _boomRange;
-  }
 
   public void OnBoom(Unit launcher, float atkScale,Vector3 initPos) {
     m_active = true;

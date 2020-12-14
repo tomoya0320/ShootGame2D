@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: tile
+  m_Name: tileset-sliced_55
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 2a0e4bc0ad21b6d46a7d5cced3109c44, type: 3}
+  m_Sprite: {fileID: -6283606344640301416, guid: 9c7d023cb3ba45a4285e5375e114bce8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

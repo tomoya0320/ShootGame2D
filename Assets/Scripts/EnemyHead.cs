@@ -14,7 +14,7 @@ public class EnemyHead : MonoBehaviour {
     if (collision.name == "foot") {
       var unit = collision.GetComponent<JumpManager>()?.unit;
       if (unit != null && unit.isAlive && unit is Character && unit.vel.y < MathUtil.epsilon) {
-        unit.Bound(_boundSpeed);
+        unit.Bound(_boundSpeed * Vector2.up);
         _enemy.DoHurt(unit.atk);
       }
     }
