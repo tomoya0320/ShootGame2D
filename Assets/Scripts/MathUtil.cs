@@ -11,4 +11,8 @@ public class MathUtil {
     float y = v2.x * Mathf.Sin(Mathf.Deg2Rad * angle) + v2.y * Mathf.Cos(Mathf.Deg2Rad * angle);
     return new Vector2(x, y);
   }
+
+  public static bool JudgeProb(float prob) {
+    return Random.Range(0, 1.0f) < prob;
+  }
 }

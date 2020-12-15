@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
   [SerializeField]
+  private KeyCode _switchDirKey;
+  [SerializeField]
   private Unit _follower;
   [SerializeField]
   private Vector2 _offset;
   [SerializeField]
   private float _followSpeed = 0.1f;
   private Vector3 m_desPos;
+  private int m_direction;
   public Vector3 desPos => m_desPos;
   public static CameraController instance;
 
@@ -16,10 +19,24 @@ public class CameraController : MonoBehaviour {
     instance = this;
   }
 
+  private void Start() {
+    m_direction = _follower.direction;
+  }
+
+  private void Update() {
+    if (_follower == null || !_follower.isAlive) {
+      return;
+    }
+
+    if (Input.GetKeyDown(_switchDirKey)) {
+      m_direction *= -1;
+    }
+  }
+
   private void FixedUpdate() {
     m_desPos = _follower.position;
 
-    m_desPos.x += _follower.direction * _offset.x;
+    m_desPos.x += m_direction * _offset.x;
     m_desPos.y += _offset.y;
     m_desPos.z = transform.position.z;
 

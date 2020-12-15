@@ -761,6 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404b13e3f9fc25d41a86448fa42898ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _switchDirKey: 306
   _follower: {fileID: 2086658933}
   _offset: {x: 10, y: 3}
   _followSpeed: 0.1
