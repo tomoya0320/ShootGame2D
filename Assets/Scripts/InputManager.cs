@@ -39,6 +39,20 @@ public class InputManager : MonoBehaviour {
     }
   }
 
+  public void SetButtonDown(OperationButton button) {
+    m_pressKeyDict[button.pressKey] = true;
+    if (m_downEventDict.ContainsKey(button.pressKey)) {
+      m_downEventDict[button.pressKey]?.Invoke();
+    }
+  }
+
+  public void SetButtonUp(OperationButton button) {
+    m_pressKeyDict[button.pressKey] = false;
+    if (m_upEventDict.ContainsKey(button.pressKey)) {
+      m_upEventDict[button.pressKey]?.Invoke();
+    }
+  }
+
   public static bool GetButton(PressKey pressKey) {
     if (!instance.m_pressKeyDict.ContainsKey(pressKey)) {
       return false;
