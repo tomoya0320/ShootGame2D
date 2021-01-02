@@ -55,6 +55,14 @@ public abstract class Unit : MonoBehaviour {
       m_rigidbody2D.velocity = value;
     }
   }
+  public float gravity {
+    get {
+      return m_rigidbody2D.gravityScale;
+    }
+    protected set {
+      m_rigidbody2D.gravityScale = value;
+    }
+  }
 
   protected virtual void Awake() {
     animator = GetComponent<Animator>();

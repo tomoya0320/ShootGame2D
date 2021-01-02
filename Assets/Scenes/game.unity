@@ -6496,7 +6496,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 3
+  m_GravityScale: 4
   m_Material: {fileID: 6200000, guid: 2cea02a14f9962e4e8c4935aff0f6f6e, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   attribute:
     hp: 100
     atk: 10
-    jumpSpeed: 20
+    jumpSpeed: 25
     moveSpeed: 10
   weapons:
   - {fileID: 1071252403}

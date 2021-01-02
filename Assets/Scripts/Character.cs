@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 
 public class Character : Unit {
+  private float m_originGravity;
+
   protected override void Start() {
     base.Start();
+
+    m_originGravity = gravity;
+
     //Down和Up事件需要特殊处理
     InputManager.RegisterDownEvent(PressKey.JUMP, OnJump);
     InputManager.RegisterDownEvent(PressKey.SWITCH_WEAPON, OnSwitchWeapon);
@@ -45,5 +50,8 @@ public class Character : Unit {
 
     //应用速度
     vel = tempVel + attribute.extraVel;
+
+    //角色跳起和下落的重力不同，下落的时候重力更大点以改善跳跃手感
+    gravity = m_originGravity * (vel.y > 0 ? 1.0f : 1.25f);
   }
 }
