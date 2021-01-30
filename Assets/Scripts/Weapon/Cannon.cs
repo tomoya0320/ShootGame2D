@@ -12,6 +12,8 @@ public class Cannon : Weapon {
   protected int shotAngleDelta;
   [SerializeField]
   protected int randomAngle;
+  [SerializeField]
+  protected int _initAngle;
   protected int shotCount;
   protected PoolManager missilePool;
   protected System.Action<Missile> onMissileBoom;
@@ -29,7 +31,7 @@ public class Cannon : Weapon {
 
       timer.OnStart(Time.fixedTime, _attackDelta);
 
-      float initAngle = -0.5f * (onShotNum - 1) * shotAngleDelta;
+      float initAngle = -0.5f * (onShotNum - 1) * shotAngleDelta + _initAngle;
       for (int i = 0; i < onShotNum; i++) {
         var missile = missilePool.GetComponent<Missile>();
         Vector3 initPos = shootMuzzle.position;

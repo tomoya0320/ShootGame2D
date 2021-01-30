@@ -14,8 +14,7 @@ public class Summoner : Weapon {
   public override void OnAttack() {
     if (timer.ready && !owner.isSwitchingWeapon && m_currentCount < _maxCount) {
       m_currentCount++;
-      var tempGo = Instantiate(_summoned, _bornPoint.position, Quaternion.identity, _folder);
-      tempGo.GetComponent<SpriteRenderer>().flipX = !owner.flipX;
+      Instantiate(_summoned, _bornPoint.position, Quaternion.identity, _folder);
       timer.OnStart(Time.fixedTime, _attackDelta);
     }
   }

@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -180489909
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -616913516966103574, guid: e217bbf2dcab38544948e7661c2aba64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -252,4 +252,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boomAudio: {fileID: 7162620219516184396}
-  _includeLauncher: 1

@@ -9,9 +9,12 @@ public class CameraController : MonoBehaviour {
   [SerializeField]
   private Vector2 _offset;
   [SerializeField]
-  private float _followSpeed = 0.1f;
+  private float _followSpeed = 0.1f;  
+  [SerializeField]
+  private float _scaleSpeed = 0.03f;
   private Vector3 m_desPos;
   private int m_direction;
+  private float m_cameraSize = 10.0f;
   public Vector3 desPos => m_desPos;
   public static CameraController instance;
 
@@ -41,6 +44,7 @@ public class CameraController : MonoBehaviour {
     m_desPos.z = transform.position.z;
 
     transform.position = Vector3.Lerp(transform.position, m_desPos, _followSpeed);
+    Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, m_cameraSize, _scaleSpeed);
   }
 
   public static void DoShake(float duration = 0.1f, float strength = 0.3f) {
@@ -49,5 +53,10 @@ public class CameraController : MonoBehaviour {
 
       Camera.main.DOShakePosition(duration, strength, 60);
     }
+  }
+
+  public static void AppendCameraValue(Vector2 offset, float size) {
+    instance.m_cameraSize += size;
+    instance._offset += offset;
   }
 }

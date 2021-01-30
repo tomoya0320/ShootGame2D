@@ -5,21 +5,35 @@ using UnityEngine;
 public class Laser : Weapon {
   [SerializeField]
   private SpriteRenderer _raySpriteRenderer;
+  [SerializeField]
+  private SpriteRenderer _muzzleSpriteRenderer;
+  [SerializeField]
+  private Vector2 _muzzleMoveRange;
   private bool m_active;
   private HashSet<Unit> m_damaged = new HashSet<Unit>();
+  private float m_moveTime = 1.0f;
+  private float m_warningTime = 2.0f;
+  private float m_rayFadeTime = 0.2f;
+  private float m_rayDuration = 0.6f;
 
   public override void OnAttack() {
     if (timer.ready && !owner.isSwitchingWeapon) {
-      m_active = true;
-      _raySpriteRenderer.transform.localScale = new Vector3(-owner.direction, 0.1f, 1.0f);
-      _raySpriteRenderer.DOFade(1.0f, 0.2f).OnComplete(() => {
-        _raySpriteRenderer.DOFade(0, 0.2f).SetDelay(1.0f).OnComplete(()=> {
-          m_active = false;
-          m_damaged.Clear();
+      float y = Random.Range(_muzzleMoveRange.x, _muzzleMoveRange.y);
+      _muzzleSpriteRenderer.transform.DOLocalMoveY(y, m_moveTime).OnComplete(() => {
+        _muzzleSpriteRenderer.DOColor(Color.red, m_warningTime).OnComplete(() => {
+          m_active = true;
+          _raySpriteRenderer.DOFade(1.0f, m_rayFadeTime).OnComplete(() => {
+            _raySpriteRenderer.DOFade(0, m_rayFadeTime).SetDelay(m_rayDuration).OnComplete(() => {
+              m_active = false;
+              m_damaged.Clear();
+              _muzzleSpriteRenderer.DOColor(Color.white, m_warningTime).OnComplete(()=> {
+              });
+            });
+          });
         });
       });
-
-      timer.OnStart(Time.fixedTime, _attackDelta);
+      timer.OnStart(Time.fixedTime, _attackDelta + m_moveTime +
+        m_rayDuration + m_warningTime * 2.0f + m_rayFadeTime * 2.0f);
     }
   }
 

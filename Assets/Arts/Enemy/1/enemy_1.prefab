@@ -505,7 +505,7 @@ MonoBehaviour:
     hp: 100
     atk: 100
     jumpSpeed: 0
-    moveSpeed: 10
+    moveSpeed: 6
   weapons: []
   jumpManager: {fileID: 0}
   switchWeaponAudio: {fileID: 0}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum PressKey {
-  LEFT, RIGHT, JUMP, ATTACK, SWITCH_WEAPON
+  LEFT, RIGHT, UP, DOWN, JUMP, ATTACK, SWITCH_WEAPON
 }
 
 public class InputManager : MonoBehaviour {

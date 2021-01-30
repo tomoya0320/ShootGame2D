@@ -12,6 +12,15 @@ public abstract class Weapon : MonoBehaviour {
 
   public virtual void OnInit(Unit owner) {
     this.owner = owner;
+  } 
+  
+  public virtual void OnInit(Unit owner, float attackDelta, float atkScale) {
+    this.owner = owner;
+  }
+
+  public void AddValue(float attackDelta, float atkScale) {
+    _attackDelta += attackDelta;
+    _atkScale += atkScale;
   }
 
   protected virtual void FixedUpdate() {
