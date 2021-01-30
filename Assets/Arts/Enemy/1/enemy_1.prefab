@@ -512,3 +512,8 @@ MonoBehaviour:
   _boomDelayTime: 10
   _bomb: {fileID: 7746263935354067728, guid: 9bbb29badecae4149bf76998aac9a4c0, type: 3}
   _timeCounter: {fileID: 992054954989493813}
+  speed: 3
+  frontbegOffset: {x: 0, y: -0.5, z: 0}
+  downbegOffset: {x: 0, y: 3.5, z: 0}
+  frontRaycastLen: 3
+  downRaycastLen: 4

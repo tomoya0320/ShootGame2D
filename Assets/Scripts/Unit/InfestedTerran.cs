@@ -1,56 +1,87 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InfestedTerran : Unit {
-  [SerializeField]
-  private float _boomDelayTime = 10.0f;
-  [SerializeField]
-  private GameObject _bomb;
-  [SerializeField]
-  private Text _timeCounter;
+public class InfestedTerran : Unit
+{
+    [SerializeField]
+    private float _boomDelayTime = 10.0f;
+    [SerializeField]
+    private GameObject _bomb;
+    [SerializeField]
+    private Text _timeCounter;
 
-  protected override void Start() {
-    base.Start();
+    public float speed = 3;
+    public Vector3 frontbegOffset;//前方射线发出点的偏移
+    public Vector3 downbegOffset;//下方发出点的偏移
+    public float frontRaycastLen;//前方向检测射线的长度
+    public float downRaycastLen;//前下方向检测射线的长度
 
-    StartCoroutine(_DelayBoom());
-  }
-
-  protected override void FixedUpdate() {
-    if (!isAlive) {
-      return;
+    protected override void Start()
+    {
+        base.Start();
+        StartCoroutine(_DelayBoom());
     }
 
-    /*
-    //移动
-    tempVel = Vector2.zero;
-    if (Mathf.Abs(vel.x) < MathUtil.epsilon) {
-      spriteRenderer.flipX = !spriteRenderer.flipX;
-    }
-    tempVel.x += direction * attribute.moveSpeed;
-    tempVel.y = vel.y;
+    protected override void FixedUpdate()
+    {
+        if (!isAlive)
+            return;
 
-    //应用速度
-    vel = tempVel + attribute.extraVel;
-    */
-  }
+        //移动
+        Vector3 front = new Vector3(-1, 0, 0);
+        Vector3 down = new Vector3(0, -1, 0);
+        if (spriteRenderer.flipX == true)
+            front = new Vector3(1, 0, 0);
 
-  private IEnumerator _DelayBoom() {
-    float startTime = Time.fixedTime;
-    while (Time.fixedTime - startTime < _boomDelayTime) {
-      float leftTime = _boomDelayTime - (Time.fixedTime - startTime);
-      string format = leftTime < 1.0f ? "0.0" : "0";
-      _timeCounter.text = leftTime.ToString(format);
-      yield return null;
+        Vector3 frontBeg = transform.position + frontbegOffset;
+        UnityEngine.Debug.DrawLine(frontBeg, frontBeg + front * frontRaycastLen, Color.red);
+        if (Physics2D.Raycast(frontBeg, front, frontRaycastLen, LayerMask.GetMask("Default")))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(frontBeg, front, frontRaycastLen, LayerMask.GetMask("Default"));
+            if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
+                spriteRenderer.flipX = !spriteRenderer.flipX;//悬崖
+        }
+
+        Vector3 downBeg = transform.position + downbegOffset;
+        UnityEngine.Debug.DrawLine(downBeg, downBeg + (front + down).normalized * downRaycastLen, Color.red);
+        if (Physics2D.Raycast(downBeg, (front + down).normalized, downRaycastLen, LayerMask.GetMask("Default")))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(downBeg, (front + down).normalized, downRaycastLen, LayerMask.GetMask("Default"));
+            if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
+                spriteRenderer.flipX = !spriteRenderer.flipX;//有墙
+        }
+        tempVel = new Vector2(front.x * speed, vel.y);
+
+        //随机转向
+        if (MathUtil.JudgeProb(0.002f))
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+        //应用速度
+        vel = tempVel + attribute.extraVel;
     }
-    if (isAlive) {
-      var bombGo = Instantiate(_bomb);
-      var bomb = bombGo.GetComponent<Bomb>();
-      bomb.OnBoom(this, 1.0f, transform.position, () => {
-        Destroy(bombGo);
-        Destroy(gameObject);
-      });
-      gameObject.SetActive(false);
+
+    private IEnumerator _DelayBoom()
+    {
+        float startTime = Time.fixedTime;
+        while (Time.fixedTime - startTime < _boomDelayTime)
+        {
+            float leftTime = _boomDelayTime - (Time.fixedTime - startTime);
+            string format = leftTime < 1.0f ? "0.0" : "0";
+            _timeCounter.text = leftTime.ToString(format);
+            yield return null;
+        }
+        if (isAlive)
+        {
+            var bombGo = Instantiate(_bomb);
+            var bomb = bombGo.GetComponent<Bomb>();
+            bomb.OnBoom(this, 1.0f, transform.position, () =>
+            {
+                Destroy(bombGo);
+                Destroy(gameObject);
+            });
+            gameObject.SetActive(false);
+        }
     }
-  }
 }
