@@ -86,14 +86,16 @@ public class Missile : MonoBehaviour {
       return;
     }
 
-    var target = collision.GetComponent<Unit>();
-    if (target == null) {
-      if (!_penetrable) {
-        _OnMissileBoom();
-      }
-    } else {
-      if (target != m_launcher && target.isAlive) {
-        _OnMissileBoom(() => target.DoHurt(m_launcher.atk * atkScale));
+    if (!collision.CompareTag(m_launcher.tag)) {
+      var target = collision.GetComponent<Unit>();
+      if (target == null) {
+        if (!_penetrable) {
+          _OnMissileBoom();
+        }
+      } else {
+        if (target != m_launcher && target.isAlive) {
+          _OnMissileBoom(() => target.DoHurt(m_launcher.atk * atkScale));
+        }
       }
     }
   }

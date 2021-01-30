@@ -23,7 +23,7 @@ public class Character : Unit {
   protected override void UpdateAnimState() {
     base.UpdateAnimState();
     animator.SetBool("move", (InputManager.GetButton(PressKey.LEFT) ||
-             InputManager.GetButton(PressKey.RIGHT)) && jumpManager.isGrounded);
+    InputManager.GetButton(PressKey.RIGHT)) && (jumpManager?.isGrounded ?? false));
   }
 
   protected override void FixedUpdate() {

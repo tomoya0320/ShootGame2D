@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +32,14 @@ public abstract class Unit : MonoBehaviour {
   [SerializeField]
   protected AudioSource switchWeaponAudio;
   protected int curWeaponIdx;
-  protected Weapon currentWeapon;
+  public Weapon currentWeapon {
+    get {
+      if (curWeaponIdx >= 0 && curWeaponIdx < weapons.Count) {
+        return weapons[curWeaponIdx];
+      }
+      return null;
+    }
+  }
   protected Animator animator;
   private Rigidbody2D m_rigidbody2D;
   protected SpriteRenderer spriteRenderer;
@@ -76,8 +82,7 @@ public abstract class Unit : MonoBehaviour {
     }
 
     curWeaponIdx = weapons.Count > 0 ? 0 : -1;
-    currentWeapon = curWeaponIdx >= 0 ? weapons[curWeaponIdx] : null;
-    jumpManager.OnInit(this);
+    jumpManager?.OnInit(this);
 
     //临时用
     m_maxHp = attribute.hp;
@@ -106,20 +111,20 @@ public abstract class Unit : MonoBehaviour {
     }
   }
 
-  protected void OnSwitchWeapon() {
-    if (isSwitchingWeapon || curWeaponIdx < 0) {
+  protected virtual void OnSwitchWeapon() {
+    if (isSwitchingWeapon) {
       return;
     }
-
+    currentWeapon?.OnSwitchOut();
     curWeaponIdx = (curWeaponIdx + 1) % weapons.Count;
-    currentWeapon = weapons[curWeaponIdx];
+    currentWeapon?.OnSwitchIn();
     if (switchWeaponAudio != null) {
       switchWeaponAudio.Play();
     }
   }
 
   protected virtual void OnJump() {
-    if (jumpManager.TryJump()) {
+    if (jumpManager?.TryJump() ?? false) {
       tempVel = vel;
       tempVel.y = attribute.jumpSpeed;
       vel = tempVel;

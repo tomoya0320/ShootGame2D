@@ -19,4 +19,8 @@ public abstract class Weapon : MonoBehaviour {
   }
 
   public abstract void OnAttack();
+
+  public virtual void OnSwitchIn() { }
+
+  public virtual void OnSwitchOut() { }
 }

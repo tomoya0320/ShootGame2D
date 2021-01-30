@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 1113412415}
   - component: {fileID: 1113412414}
   m_Layer: 5
-  m_Name: hp view
+  m_Name: ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1113412414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549110614534390882}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
