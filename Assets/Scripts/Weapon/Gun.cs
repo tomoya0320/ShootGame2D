@@ -18,6 +18,8 @@ public class Gun : Weapon {
   [SerializeField]
   protected int randomAngle;
   [SerializeField]
+  protected int _initAngle;
+  [SerializeField]
   protected float recoilVel;
   [SerializeField]
   protected float recoilTime;
@@ -41,7 +43,7 @@ public class Gun : Weapon {
 
       timer.OnStart(Time.fixedTime, _attackDelta);
 
-      float initAngle = -0.5f * (onShotNum - 1) * shotAngleDelta;
+      float initAngle = -0.5f * (onShotNum - 1) * shotAngleDelta + _initAngle;
       for (int i = 0; i < onShotNum; i++) {
         var missile = missilePool.GetComponent<Missile>();
         Vector3 initPos = shootMuzzle.position;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBodyAttack : Weapon {
+public class BodyAttack : Weapon {
   [SerializeField]
   private int _maxHitNum = 1;
   private List<Unit> m_targets = new List<Unit>();
@@ -31,10 +31,12 @@ public class EnemyBodyAttack : Weapon {
   }
 
   private void OnTriggerExit2D(Collider2D collision) {
-    var unit = collision.GetComponent<Unit>();
-    if (unit != null && unit != owner && unit is Character) {
-      if (m_targets.Contains(unit)) {
-        m_targets.Remove(unit);
+    if (!collision.CompareTag(owner.tag)) {
+      var unit = collision.GetComponent<Unit>();
+      if (unit != null && unit != owner) {
+        if (m_targets.Contains(unit)) {
+          m_targets.Remove(unit);
+        }
       }
     }
   }

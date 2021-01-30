@@ -21,17 +21,18 @@ public class InfestedTerran : Unit {
       return;
     }
 
+    /*
     //移动
     tempVel = Vector2.zero;
-    var player = FindObjectOfType<Character>();
-    if (player.isAlive) {
-      spriteRenderer.flipX = (player.position - transform.position).x > 0;
+    if (Mathf.Abs(vel.x) < MathUtil.epsilon) {
+      spriteRenderer.flipX = !spriteRenderer.flipX;
     }
     tempVel.x += direction * attribute.moveSpeed;
     tempVel.y = vel.y;
 
     //应用速度
     vel = tempVel + attribute.extraVel;
+    */
   }
 
   private IEnumerator _DelayBoom() {
