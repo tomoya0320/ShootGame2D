@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attribute:
-    hp: 100
+    hp: 1000
     atk: 10
     jumpSpeed: 25
     moveSpeed: 10

@@ -629,7 +629,7 @@ MonoBehaviour:
     hp: 1000
     atk: 10
     jumpSpeed: 20
-    moveSpeed: 10
+    moveSpeed: 20
   weapons:
   - {fileID: 497726520299181364}
   - {fileID: 497726521766832322}
