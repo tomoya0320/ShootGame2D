@@ -271,8 +271,8 @@ MonoBehaviour:
   bulletShellPrefab: {fileID: 1132998840130229253, guid: d5754b8f3cdae7d47a120996680c953c, type: 3}
   bulletShellMuzzle: {fileID: 497726521514316968}
   missilePrefab: {fileID: 6449766086177299181, guid: 0e7a9cd03cc671e40ae0e6955fc574a6, type: 3}
-  onShotNum: 3
-  shotAngleDelta: 6
+  onShotNum: 6
+  shotAngleDelta: 10
   randomAngle: 3
   _initAngle: 0
   recoilVel: 3
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attribute:
-    hp: 10000
+    hp: 1000
     atk: 10
     jumpSpeed: 20
     moveSpeed: 10

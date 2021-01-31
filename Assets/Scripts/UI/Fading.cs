@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Fading : MonoBehaviour
 {
-    public GameObject picture;
-    public GameObject[] otherThings;
-    public CameraController cc;
+    public CanvasGroup name;
     private float i;//用来记录透明度改变
     private bool open;//用来记录进入还是退出
     private bool hasOpen = false;//用来记录是否打开过
@@ -20,7 +19,7 @@ public class Fading : MonoBehaviour
 
     void Update()
     {
-        picture.GetComponent<CanvasGroup>().alpha = i;
+        name.alpha = i;
         if (open)
             i += Time.deltaTime;
         else i -= Time.deltaTime;
@@ -28,14 +27,7 @@ public class Fading : MonoBehaviour
             open = false;
         if (i <= 0)
         {
-            if (!hasOpen)
-            {
-                for (int i = 0; i < otherThings.Length; i++)
-                    otherThings[i].SetActive(true);
-                cc.enabled = true;
-                picture.SetActive(false);
-                hasOpen = true;
-            }
+            SceneManager.LoadScene("game");
         }
     }
 }

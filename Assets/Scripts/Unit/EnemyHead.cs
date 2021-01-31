@@ -5,8 +5,11 @@ public class EnemyHead : MonoBehaviour {
   private Unit _enemy;
   [SerializeField]
   private float _boundSpeed = 20.0f;
+    [SerializeField]
+    private bool isBird = false;
 
-  private void OnTriggerEnter2D(Collider2D collision) {
+
+    private void OnTriggerEnter2D(Collider2D collision) {
     if (!_enemy.isAlive) {
       return;
     }

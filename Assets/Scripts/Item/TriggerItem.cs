@@ -6,6 +6,7 @@ public class TriggerItem : MonoBehaviour
     public MyText dialogue;
     public GameObject boss;
     public CameraController cc;
+    public EnemyGenerator eg;//Ë¢¹Ö
     public int num;//Ë³Ðò
     [SerializeField]
     private List<string> _filterTags;
@@ -15,11 +16,26 @@ public class TriggerItem : MonoBehaviour
         var unit = collision.GetComponent<Unit>();
         if (unit != null && _filterTags.Contains(collision.tag))
         {
-            dialogue.openText = true;
-            if (num == 2)
+            switch (num)
             {
-                boss.SetActive(true);
-                cc.m_cameraSize = 40f;
+                case 1:
+
+                    break;
+                case 2:
+                    dialogue.openText = true;
+                    eg.enabled = true;
+                    break;
+                case 3:
+                    eg.enabled = true;
+                    break;
+                case 4:
+                    eg.enabled = true;
+                    break;
+                case 5:
+                    dialogue.openText = true;
+                    boss.SetActive(true);
+                    cc.m_cameraSize = 40f;
+                    break;
             }
             Destroy(gameObject);
         }

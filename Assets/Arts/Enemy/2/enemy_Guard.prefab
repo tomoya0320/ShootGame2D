@@ -412,6 +412,7 @@ MonoBehaviour:
   _attackDelta: 0.15
   _atkScale: 1
   shootMuzzle: {fileID: 6917798836923505356}
+  shootUpMuzzle: {fileID: 0}
   bulletShellPrefab: {fileID: 1132998840130229253, guid: d5754b8f3cdae7d47a120996680c953c, type: 3}
   bulletShellMuzzle: {fileID: 2383512886460331843}
   missilePrefab: {fileID: 6449766086177299181, guid: 13619fcf9de3b27429108f7ff55ed43f, type: 3}
@@ -483,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 8188123392271878973}
   _boundSpeed: 20
+  isBird: 0
 --- !u!1 &3876899097606602242
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +530,7 @@ GameObject:
   - component: {fileID: 79847948360180624}
   - component: {fileID: 8188123392271878973}
   m_Layer: 8
-  m_Name: enemy_guard
+  m_Name: enemy_Guard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -681,7 +683,7 @@ MonoBehaviour:
   jumpManager: {fileID: 4770409501172809213}
   switchWeaponAudio: {fileID: 0}
   speed: 3
-  frontbegOffset: {x: 0, y: -0.5, z: 0}
+  frontbegOffset: {x: 0, y: -2.6, z: 0}
   downbegOffset: {x: 0, y: 3.5, z: 0}
   frontRaycastLen: 3
   downRaycastLen: 4
