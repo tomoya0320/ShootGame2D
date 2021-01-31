@@ -26,9 +26,9 @@ public class Enemy_Dog : Unit
         UnityEngine.Debug.DrawLine(frontBeg, frontBeg + front * frontRaycastLen, Color.red);
         if (Physics2D.Raycast(frontBeg, front, frontRaycastLen, LayerMask.GetMask("Default")))
         {
-            RaycastHit2D hit = Physics2D.Raycast(frontBeg, front, frontRaycastLen, LayerMask.GetMask("Default"));
-            if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
-                spriteRenderer.flipX = !spriteRenderer.flipX;//ะüัย
+            //RaycastHit2D hit = Physics2D.Raycast(frontBeg, front, frontRaycastLen, LayerMask.GetMask("Default"));
+            //if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
+            //    spriteRenderer.flipX = !spriteRenderer.flipX;//ะüัย
         }
 
         Vector3 downBeg = transform.position + downbegOffset;

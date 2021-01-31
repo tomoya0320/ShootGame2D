@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour {
   private float _scaleSpeed = 0.03f;
   private Vector3 m_desPos;
   private int m_direction;
-  private float m_cameraSize = 10.0f;
+  public float m_cameraSize = 10.0f;
   public Vector3 desPos => m_desPos;
   public static CameraController instance;
 

@@ -292,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552120866682261459}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6917798836923505356}
@@ -466,7 +466,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.1635275}
+  m_Offset: {x: 0, y: 1.56}
   serializedVersion: 2
   m_Radius: 0.76852703
 --- !u!114 &9127245834842882516
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 79847948360180624}
   - component: {fileID: 8188123392271878973}
   m_Layer: 8
-  m_Name: enemy_Guard
+  m_Name: enemy_guard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,7 +592,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1755772209161902963, guid: 18986048efb555b4eaa0d55d66d9a80f, type: 3}
+  m_Sprite: {fileID: 4911306908532648448, guid: e905ec95a5c1488409f92ccd6358b19c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -634,7 +634,7 @@ Animator:
   m_GameObject: {fileID: 4770409501086832944}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ac874d2cb681e964d8bb1567ff82c596, type: 2}
+  m_Controller: {fileID: 9100000, guid: 62212ea60139b014ab3d17273879fcf5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
@@ -656,8 +656,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.3333334}
-  m_Size: {x: 2.6666667, y: 2.6666667}
+  m_Offset: {x: 0, y: -0.26}
+  m_Size: {x: 2.6666667, y: 3.5}
   m_Direction: 0
 --- !u!114 &8188123392271878973
 MonoBehaviour:
@@ -730,7 +730,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3511684}
+  m_Offset: {x: 0, y: -1.86}
   serializedVersion: 2
   m_Radius: 0.6778524
 --- !u!114 &4770409501172809213
