@@ -37,8 +37,7 @@ public class Character : Unit {
     if (InputManager.GetButton(PressKey.LEFT)) {
       spriteRenderer.flipX = false;
       tempVel.x -= attribute.moveSpeed;
-    }
-    if (InputManager.GetButton(PressKey.RIGHT)) {
+    } else if (InputManager.GetButton(PressKey.RIGHT)) {
       spriteRenderer.flipX = true;
       tempVel.x += attribute.moveSpeed;
     }

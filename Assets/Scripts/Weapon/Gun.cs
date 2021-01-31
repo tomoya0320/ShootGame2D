@@ -51,7 +51,7 @@ public class Gun : Weapon {
         var lookup = owner.GetAnimBool("lookup");
         Vector3 initPos = lookup ? shootUpMuzzle.position : shootMuzzle.position;
         initPos.x = owner.position.x + owner.direction *
-                   (owner.position.x - shootMuzzle.position.x);
+                   (owner.position.x - initPos.x);
         float angle = Random.Range(-randomAngle, randomAngle) + initAngle + i * shotAngleDelta + (lookup ? 90 : 0);
         missile.OnLaunch(owner, _atkScale, angle, initPos, onMissileBoom);
 

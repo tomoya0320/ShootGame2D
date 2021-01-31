@@ -117,6 +117,8 @@ public abstract class Unit : MonoBehaviour {
       }
       triggerState = AnimTriggerState.NONE;
     }
+
+    animator.SetBool("isGrounded", jumpManager?.isGrounded ?? false);
   }
 
   public bool GetAnimBool(string name) {
