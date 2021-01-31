@@ -179,7 +179,14 @@ public abstract class Unit : MonoBehaviour {
     attribute.hp = Mathf.Min(attribute.hp + hp, m_maxHp);
   }
 
-  protected virtual void OnDie() {
+    public bool IsAlive()
+    {
+        if (attribute.hp > 0)
+            return true;
+        else return false;
+    }
+
+    protected virtual void OnDie() {
     tempVel = Vector2.one * 250.0f;
     tempVel.x *= -direction;
     vel = Vector2.zero;

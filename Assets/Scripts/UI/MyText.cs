@@ -8,8 +8,6 @@ public class MyText : MonoBehaviour
     public bool openText;//是否开启对话
     public Text text;//文本
     public GameObject frame;//对话框
-    public GameObject pause;//对话框
-    public GameObject restart;//对话框
 
     private bool preOpenText;//之前对话开启的状态
     private int textNum = 1;//对话序列号
@@ -70,15 +68,11 @@ public class MyText : MonoBehaviour
             if (openText)
             {
                 frame.SetActive(true);
-                pause.SetActive(false);
-                restart.SetActive(false);
                 textNum += 1;
             }
             else
             {
                 frame.SetActive(false);
-                pause.SetActive(true);
-                restart.SetActive(true);
             }
             preOpenText = openText;
         }
@@ -88,7 +82,7 @@ public class MyText : MonoBehaviour
             if (textNum != preNum)
             {
                 text.text = " ";
-                text.DOText(dialogue[preNum], 2);
+                text.DOText(dialogue[preNum], 1.8f).SetEase(Ease.Linear);
                 preNum = textNum;
             }
         }

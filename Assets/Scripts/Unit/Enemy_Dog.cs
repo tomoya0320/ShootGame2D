@@ -11,6 +11,12 @@ public class Enemy_Dog : Unit
     public float frontRaycastLen;//前方向检测射线的长度
     public float downRaycastLen;//前下方向检测射线的长度
 
+    protected override void UpdateAnimState()
+    {
+        base.UpdateAnimState();
+        animator.SetBool("jump", Mathf.Abs(vel.y) > 0.1);
+    }
+
     protected override void FixedUpdate()
     {
         if (!isAlive)

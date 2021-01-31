@@ -5,6 +5,7 @@ public class TriggerItem : MonoBehaviour
 {
     public MyText dialogue;
     public GameObject boss;
+    public CameraController cc;
     public int num;//Ë³Ðò
     [SerializeField]
     private List<string> _filterTags;
@@ -16,7 +17,10 @@ public class TriggerItem : MonoBehaviour
         {
             dialogue.openText = true;
             if (num == 2)
+            {
                 boss.SetActive(true);
+                cc.m_cameraSize = 40f;
+            }
             Destroy(gameObject);
         }
     }
