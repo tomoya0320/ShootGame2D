@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Gun : Weapon {
   [SerializeField]
-  protected Transform shootMuzzle;
+  protected Transform shootMuzzle; 
+  [SerializeField]
+  protected Transform shootUpMuzzle;
   [SerializeField]
   protected GameObject bulletShellPrefab;
   [SerializeField]
@@ -46,10 +48,11 @@ public class Gun : Weapon {
       float initAngle = -0.5f * (onShotNum - 1) * shotAngleDelta + _initAngle;
       for (int i = 0; i < onShotNum; i++) {
         var missile = missilePool.GetComponent<Missile>();
-        Vector3 initPos = shootMuzzle.position;
+        var lookup = owner.GetAnimBool("lookup");
+        Vector3 initPos = lookup ? shootUpMuzzle.position : shootMuzzle.position;
         initPos.x = owner.position.x + owner.direction *
                    (owner.position.x - shootMuzzle.position.x);
-        float angle = Random.Range(-randomAngle, randomAngle) + initAngle + i * shotAngleDelta;
+        float angle = Random.Range(-randomAngle, randomAngle) + initAngle + i * shotAngleDelta + (lookup ? 90 : 0);
         missile.OnLaunch(owner, _atkScale, angle, initPos, onMissileBoom);
 
         initPos = bulletShellMuzzle.position;

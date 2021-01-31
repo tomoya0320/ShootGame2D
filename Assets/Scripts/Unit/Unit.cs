@@ -119,6 +119,17 @@ public abstract class Unit : MonoBehaviour {
     }
   }
 
+  public bool GetAnimBool(string name) {
+    return animator.GetBool(name);
+  }
+
+  public void AddWeapon(Weapon weapon) {
+    weapon.transform.SetParent(transform.Find("weapons"));
+    weapon.gameObject.transform.localPosition = Vector3.zero;
+    weapon.OnInit(this);
+    weapons.Add(weapon);
+  }
+
   protected virtual void OnSwitchWeapon() {
     if (isSwitchingWeapon) {
       return;
