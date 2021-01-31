@@ -23,7 +23,14 @@ public class Boss : Unit
     public bool flyDir = true;//随机上下
     private float flyTime = 0;//记录飞行时间
 
-    protected override void FixedUpdate()
+  protected override void UpdateAnimState() {
+    base.UpdateAnimState();
+
+    animator.SetBool("move", Mathf.Abs(vel.x) > MathUtil.epsilon);
+    animator.SetBool("flying", m_mode == 1);
+  }
+
+  protected override void FixedUpdate()
     {
         if (!isAlive)
         {
