@@ -119,6 +119,10 @@ public abstract class Unit : MonoBehaviour {
     }
   }
 
+  public bool GetAnimBool(string name) {
+    return animator.GetBool(name);
+  }
+
   protected virtual void OnSwitchWeapon() {
     if (isSwitchingWeapon) {
       return;

@@ -24,6 +24,7 @@ public class Character : Unit {
     base.UpdateAnimState();
     animator.SetBool("move", (InputManager.GetButton(PressKey.LEFT) ||
     InputManager.GetButton(PressKey.RIGHT)) && (jumpManager?.isGrounded ?? false));
+    animator.SetBool("lookup", InputManager.GetButton(PressKey.UP));
   }
 
   protected override void FixedUpdate() {
