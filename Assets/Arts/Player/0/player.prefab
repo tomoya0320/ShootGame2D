@@ -376,7 +376,7 @@ MonoBehaviour:
   shotAngleDelta: 0
   randomAngle: 3
   _initAngle: 0
-  recoilVel: 2
+  recoilVel: 1
   recoilTime: 0.2
 --- !u!1 &189036292421101228
 GameObject:
@@ -529,8 +529,8 @@ MonoBehaviour:
   bulletShellPrefab: {fileID: 1132998840130229253, guid: d5754b8f3cdae7d47a120996680c953c, type: 3}
   bulletShellMuzzle: {fileID: 189036293587806002}
   missilePrefab: {fileID: 6449766086177299181, guid: 0e7a9cd03cc671e40ae0e6955fc574a6, type: 3}
-  onShotNum: 3
-  shotAngleDelta: 6
+  onShotNum: 4
+  shotAngleDelta: 10
   randomAngle: 3
   _initAngle: 0
   recoilVel: 3
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   shotAngleDelta: 0
   randomAngle: 3
   _initAngle: 0
-  recoilVel: 4
+  recoilVel: 5
   recoilTime: 0.2
   bombPrefab: {fileID: 7746263935354067728, guid: 9bbb29badecae4149bf76998aac9a4c0, type: 3}
   boomDelta: 1
@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attribute:
-    hp: 100
+    hp: 150
     atk: 10
     jumpSpeed: 25
     moveSpeed: 10

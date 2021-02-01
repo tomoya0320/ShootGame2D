@@ -12,6 +12,12 @@ public class Enemy_Bird : Unit
     public bool flyDir = true;//随机上下
     private float flyTime = 0;//记录飞行时间
 
+    protected override void UpdateAnimState()
+    {
+        base.UpdateAnimState();
+        animator.SetBool("shoot", false);
+    }
+
     protected override void FixedUpdate()
     {
         if (!isAlive)
@@ -70,7 +76,10 @@ public class Enemy_Bird : Unit
             spriteRenderer.flipX = !spriteRenderer.flipX;
         //随机攻击
         if (MathUtil.JudgeProb(0.01f))
+        {
             currentWeapon?.OnAttack();
+            animator.SetBool("shoot", true);
+        }
         //应用速度
         vel = tempVel + attribute.extraVel;
     }

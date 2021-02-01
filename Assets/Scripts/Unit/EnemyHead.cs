@@ -6,7 +6,7 @@ public class EnemyHead : MonoBehaviour {
   [SerializeField]
   private float _boundSpeed = 20.0f;
     [SerializeField]
-    private bool isBird = false;
+    private float _hurt = 10f;
 
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -18,7 +18,7 @@ public class EnemyHead : MonoBehaviour {
       var unit = collision.GetComponent<JumpManager>()?.unit;
       if (unit != null && unit.isAlive && unit is Character && unit.vel.y < MathUtil.epsilon) {
         unit.Bound(_boundSpeed * Vector2.up);
-        _enemy.DoHurt(unit.atk);
+        _enemy.DoHurt(_hurt);
       }
     }
   }

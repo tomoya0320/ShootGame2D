@@ -72,7 +72,9 @@ public class Boss : Unit
                     UnityEngine.Debug.DrawLine(downBeg, downBeg + (front + down).normalized * downRaycastLen, Color.red);
                     if (Physics2D.Raycast(downBeg, (front + down).normalized, downRaycastLen, LayerMask.GetMask("Default")))
                     {
-                        //前面有墙
+                        RaycastHit2D hit = Physics2D.Raycast(downBeg, (front + down).normalized, downRaycastLen, LayerMask.GetMask("Default"));
+                        if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
+                            spriteRenderer.flipX = !spriteRenderer.flipX;//前面有墙
                     }
                     tempVel = new Vector2(front.x * speed, vel.y);
 
@@ -100,28 +102,38 @@ public class Boss : Unit
                     Vector3[] beg = new Vector3[num];
                     for (int i = 0; i < num; i++)
                         beg[i] = transform.position + begOffset[i];
-                    UnityEngine.Debug.DrawLine(beg[0], beg[0] + (front).normalized * raycastLen[0], Color.red);
-                    UnityEngine.Debug.DrawLine(beg[1], beg[1] + (front).normalized * raycastLen[1], Color.red);
-                    UnityEngine.Debug.DrawLine(beg[2], beg[2] + (front + down).normalized * raycastLen[2], Color.red);
-                    UnityEngine.Debug.DrawLine(beg[3], beg[3] + (front - down).normalized * raycastLen[3], Color.red);
+                    UnityEngine.Debug.DrawLine(beg[0], beg[0] + (front).normalized * raycastLen[0], Color.red);//前
+                    //UnityEngine.Debug.DrawLine(beg[1], beg[1] + (front).normalized * raycastLen[1], Color.red);
+                    UnityEngine.Debug.DrawLine(beg[2], beg[2] + (-down).normalized * raycastLen[2], Color.red);//上
+                    UnityEngine.Debug.DrawLine(beg[3], beg[3] + (down).normalized * raycastLen[3], Color.red);//下
 
-                    if (Physics2D.Raycast(beg[0], (front + down).normalized, raycastLen[0], LayerMask.GetMask("Default")) ||
-                        Physics2D.Raycast(beg[1], (front - down).normalized, raycastLen[1], LayerMask.GetMask("Default")))
+                    if (Physics2D.Raycast(beg[0], (front).normalized, raycastLen[0], LayerMask.GetMask("Default")))
                     {
-                        //前面有墙
+                        RaycastHit2D hit0 = Physics2D.Raycast(beg[0], (front).normalized, raycastLen[0], LayerMask.GetMask("Default"));
+                        if (hit0.collider != null && hit0.collider.tag != "IgnoreMissile")
+                        {
+                            spriteRenderer.flipX = !spriteRenderer.flipX;//前面有墙
+                            print("前面有墙");
+                        }
                     }
 
-                    if (Physics2D.Raycast(beg[2], (front + down).normalized, raycastLen[2], LayerMask.GetMask("Default")))
+                    if (Physics2D.Raycast(beg[2], (-down).normalized, raycastLen[2], LayerMask.GetMask("Default")))
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(beg[2], (front + down).normalized, raycastLen[2], LayerMask.GetMask("Default"));
-                        if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
-                            flyDir = true;//上面有墙
+                        RaycastHit2D hit2 = Physics2D.Raycast(beg[2], (-down).normalized, raycastLen[2], LayerMask.GetMask("Default"));
+                        if (hit2.collider != null && hit2.collider.tag != "IgnoreMissile")
+                        {
+                            flyDir = true;//向下飞//上面有墙
+                            print("上面有墙");
+                        }
                     }
-                    if (Physics2D.Raycast(beg[3], (front - down).normalized, raycastLen[3], LayerMask.GetMask("Default")))
+                    if (Physics2D.Raycast(beg[3], (down).normalized, raycastLen[3], LayerMask.GetMask("Default")))
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(beg[3], (front - down).normalized, raycastLen[3], LayerMask.GetMask("Default"));
-                        if (hit.collider != null && hit.collider.tag != "IgnoreMissile")
-                            flyDir = false;//下面有墙
+                        RaycastHit2D hit3 = Physics2D.Raycast(beg[3], (down).normalized, raycastLen[3], LayerMask.GetMask("Default"));
+                        if (hit3.collider != null && hit3.collider.tag != "IgnoreMissile")
+                        {
+                            flyDir = false;//向上飞//下面有墙
+                            print("下面有墙");
+                        }
                     }
                     if (Mathf.Abs(vel.y) > 5f)
                         flyDir = !(flyDir);//防止超速
@@ -132,11 +144,11 @@ public class Boss : Unit
                         flyTime = 0.1f;
                     tempVel = new Vector2(front.x * speed, vel.y + flyTime);
 
-                    //随机上下，下的概率更大
-                    if (MathUtil.JudgeProb(0.01f))
-                        flyDir = false;
-                    if (MathUtil.JudgeProb(0.02f))
-                        flyDir = true;
+                    //随机上下，上的概率更大
+                    if (MathUtil.JudgeProb(0.03f))
+                        flyDir = false;//上
+                    if (MathUtil.JudgeProb(0.001f))
+                        flyDir = true;//下
                     //随机左右
                     if (MathUtil.JudgeProb(0.01f))
                         spriteRenderer.flipX = !spriteRenderer.flipX;

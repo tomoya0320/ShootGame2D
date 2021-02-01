@@ -11,6 +11,12 @@ public class Enemy_Guard : Unit
     public float frontRaycastLen;//前方向检测射线的长度
     public float downRaycastLen;//前下方向检测射线的长度
 
+    protected override void UpdateAnimState()
+    {
+        base.UpdateAnimState();
+        animator.SetBool("shoot", false);
+    }
+
     protected override void FixedUpdate()
     {
         if (!isAlive)
@@ -46,7 +52,10 @@ public class Enemy_Guard : Unit
             spriteRenderer.flipX = !spriteRenderer.flipX;
         //随机攻击
         if (MathUtil.JudgeProb(0.02f))
+        {
             currentWeapon?.OnAttack();
+            animator.SetBool("shoot", true);
+        }
         //应用速度
         vel = tempVel + attribute.extraVel;
     }

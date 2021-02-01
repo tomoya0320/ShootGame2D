@@ -19,7 +19,7 @@ public class TriggerItem : MonoBehaviour
             switch (num)
             {
                 case 1:
-
+                    eg.enabled = true;
                     break;
                 case 2:
                     dialogue.openText = true;

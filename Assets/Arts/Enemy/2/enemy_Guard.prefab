@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 8188123392271878973}
   _boundSpeed: 20
-  isBird: 0
+  _hurt: 10
 --- !u!1 &3876899097606602242
 GameObject:
   m_ObjectHideFlags: 0
