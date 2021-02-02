@@ -292,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2896890857998758565}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7034047846562662047}
@@ -417,9 +417,9 @@ MonoBehaviour:
   bulletShellMuzzle: {fileID: 7636857839220960992}
   missilePrefab: {fileID: 6449766086177299181, guid: 0e7a9cd03cc671e40ae0e6955fc574a6, type: 3}
   onShotNum: 6
-  shotAngleDelta: 60
+  shotAngleDelta: 40
   randomAngle: 3
-  _initAngle: 0
+  _initAngle: 90
   recoilVel: 3
   recoilTime: 0.2
 --- !u!1 &3105763082387976058
@@ -484,6 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemy: {fileID: 4214978352697274215}
   _boundSpeed: 20
+  _hurt: 10
 --- !u!1 &4770409501086832944
 GameObject:
   m_ObjectHideFlags: 0

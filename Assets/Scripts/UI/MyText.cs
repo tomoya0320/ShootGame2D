@@ -13,7 +13,7 @@ public class MyText : MonoBehaviour
     private int textNum = 1;//对话序列号
     private int preNum;//之前的序列号
     private string[] dialogue;//对话
-    private float pointTime = 2f;//点击时间
+    private float pointTime = 0f;//点击时间
 
     void Start()
     {
